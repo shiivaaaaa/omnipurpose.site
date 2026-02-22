@@ -5,19 +5,15 @@ const supabaseClient = supabase.createClient(
 
 async function protect(){
 
-const { data:{ session } } =
+const { data } =
 await supabaseClient.auth.getSession();
 
-if(!session){
+if(!data.session){
 window.location.replace("/login.html");
 }
 
 }
 
-/* Run immediately */
-protect();
+document.addEventListener("DOMContentLoaded", protect);
 
-/* Run again if user navigates back */
-window.addEventListener("pageshow", function(){
-protect();
-});
+window.addEventListener("pageshow", protect);
