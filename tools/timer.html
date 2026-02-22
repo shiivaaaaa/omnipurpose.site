@@ -1,8 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<title>Timer</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="/tools/auth.js"></script>
-<meta http-equiv="refresh" content="0; url=coming-soon.html">
+<script src="auth.js"></script>
+
 </head>
+
+<body style="background:#0b1220;color:white;text-align:center;margin-top:100px;">
+
+<h2>Timer</h2>
+
+<input id="sec" placeholder="Seconds">
+
+<button onclick="start()">Start</button>
+
+<h3 id="out"></h3>
+
+<script>
+
+function start(){
+let s=document.getElementById("sec").value;
+
+let i=setInterval(()=>{
+s--;
+document.getElementById("out").innerText=s;
+if(s<=0) clearInterval(i);
+},1000);
+
+}
+
+</script>
+
+</body>
 </html>
