@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OmniPurpose ClassWiz</title>
+<link rel="stylesheet" href="styles.css">
+
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
+
+const supabaseClient = createClient(
+"https://bhbdkarfpmvdbtdbsvmv.supabase.co",
+"sb_publishable_yhjFWE2LvzK3n4omhwzFuA_N2blhp38"
+)
+
+const { data } = await supabaseClient.auth.getSession()
+if(!data.session){
+window.location.replace("/login.html")
+}
+</script>
+
+</head>
+<body>
+
+<div class="calculator">
+
+<div class="top-bar">
+<select id="modeSelect">
+<option value="scientific">Scientific</option>
+<option value="complex">Complex</option>
+<option value="matrix">Matrix</option>
+<option value="equation">Equation</option>
+<option value="statistics">Statistics</option>
+<option value="base">Base-N</option>
+<option value="vector">Vector</option>
+<option value="table">Table</option>
+</select>
+</div>
+
+<div id="display"></div>
+
+<div id="modeContainer"></div>
+
+</div>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
