@@ -2,114 +2,94 @@
 <html>
 <head>
 <title>Login — OmniPurpose</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-body {
-background: linear-gradient(135deg, #0b1220, #1f2937);
-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-font-family: Arial;
-color: white;
+body{
+background:#0b1220;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Arial;
+color:white;
 }
-
-.card {
-background: #111827;
-padding: 30px;
-border-radius: 10px;
-width: 320px;
-text-align: center;
+.card{
+background:#111827;
+padding:30px;
+border-radius:10px;
+width:320px;
+text-align:center;
 }
-
-input {
-width: 100%;
-padding: 12px;
-margin: 10px 0;
-border-radius: 5px;
-border: none;
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:5px;
+border:none;
 }
-
-button {
-width: 100%;
-padding: 12px;
-background: #38bdf8;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-font-weight: bold;
-}
-
-button:hover {
-background: #0ea5e9;
-}
-
-#msg {
-margin-top: 10px;
-color: #9ca3af;
+button{
+width:100%;
+padding:12px;
+background:#38bdf8;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
 }
 </style>
-
 </head>
-
 <body>
 
 <div class="card">
-
 <h2>Login</h2>
 
 <input type="email" id="email" placeholder="Enter email">
-
 <button onclick="sendOTP()">Send OTP</button>
 
 <input type="text" id="otp" placeholder="Enter OTP">
-
 <button onclick="verifyOTP()">Verify OTP</button>
 
-<div id="msg"></div>
-
+<p id="msg"></p>
 </div>
 
 <script>
 
-const supabase = window.supabase.createClient(
+const supabaseClient = supabase.createClient(
 "https://bhbdkarfpmvdbtdbsvmv.supabase.co",
 "sb_publishable_yhjFWE2LvzK3n4omhwzFuA_N2blhp38"
 );
 
-async function sendOTP() {
+async function sendOTP(){
 
-const email = document.getElementById("email").value;
+const email=document.getElementById("email").value;
 
-const { error } = await supabase.auth.signInWithOtp({
-email: email
+const {error}=await supabaseClient.auth.signInWithOtp({
+email:email
 });
 
-if(error)
-document.getElementById("msg").innerText = error.message;
-else
-document.getElementById("msg").innerText = "OTP sent. Check email.";
-
+if(error){
+msg.innerText=error.message;
+}else{
+msg.innerText="OTP sent to email.";
+}
 }
 
-async function verifyOTP() {
+async function verifyOTP(){
 
-const email = document.getElementById("email").value;
-const otp = document.getElementById("otp").value;
+const email=document.getElementById("email").value;
+const token=document.getElementById("otp").value;
 
-const { error } = await supabase.auth.verifyOtp({
-email: email,
-token: otp,
-type: "email"
+const {error}=await supabaseClient.auth.verifyOtp({
+email:email,
+token:token,
+type:"email"
 });
 
-if(error)
-document.getElementById("msg").innerText = error.message;
-else
-window.location.href = "/tools/";
-
+if(error){
+msg.innerText=error.message;
+}else{
+window.location.href="/tools/calculator.html";
+}
 }
 
 </script>
