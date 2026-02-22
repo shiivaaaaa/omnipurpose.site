@@ -4,49 +4,150 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OmniPurpose</title>
+
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    body {
+      background: #0b1220;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 80px 20px;
       text-align: center;
+      background: linear-gradient(180deg, #0b1220, #111827);
     }
-    .container {
-      max-width: 800px;
-    }
-    h1 {
+
+    header h1 {
       font-size: 48px;
+      font-weight: 700;
       margin-bottom: 10px;
     }
-    p {
+
+    header p {
       font-size: 20px;
-      color: #94a3b8;
+      color: #9ca3af;
     }
-    .btn {
-      display: inline-block;
+
+    nav {
       margin-top: 20px;
-      padding: 12px 24px;
-      background: #38bdf8;
-      color: #0f172a;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
     }
-    .btn:hover {
-      background: #0ea5e9;
+
+    nav a {
+      margin: 0 15px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .tools a {
+      display: block;
+      padding: 15px;
+      margin: 10px 0;
+      background: #111827;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #e5e7eb;
+      transition: 0.2s;
+    }
+
+    .tools a:hover {
+      background: #1f2937;
+    }
+
+    .ceo {
+      background: #111827;
+      padding: 25px;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #6b7280;
+      border-top: 1px solid #1f2937;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>OmniPurpose</h1>
-    <p>One domain. Infinite possibilities.</p>
-    <a class="btn" href="#">Coming Soon</a>
+
+<header>
+  <h1>OmniPurpose</h1>
+  <p>One Platform. Infinite Possibilities.</p>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#tools">Tools</a>
+    <a href="#ceo">CEO</a>
+  </nav>
+</header>
+
+<section id="about">
+  <h2>About OmniPurpose</h2>
+  <p>
+    OmniPurpose is a universal digital platform designed to provide powerful tools,
+    applications, and solutions in one centralized location. Our mission is to build
+    a scalable ecosystem where users can access multiple utilities, services, and
+    intelligent tools seamlessly.
+  </p>
+
+  <p>
+    This platform will continuously evolve to include productivity tools, AI utilities,
+    web applications, and innovative digital solutions.
+  </p>
+</section>
+
+<section id="tools">
+  <h2>Tools</h2>
+
+  <div class="tools">
+    <a href="/tools/">Open Tools Section</a>
+    <a href="/tools/calculator.html">Calculator Tool</a>
   </div>
+</section>
+
+<section id="ceo">
+  <h2>CEO</h2>
+
+  <div class="ceo">
+    <h3>Shiva Singh</h3>
+
+    <p>
+      Shiva Singh is the founder and CEO of OmniPurpose. He established this platform
+      with the vision of creating a unified digital environment capable of hosting
+      multiple tools, applications, and scalable systems under a single domain.
+    </p>
+
+    <p>
+      His focus is on building efficient, powerful, and future-ready digital
+      infrastructure that can evolve into a full ecosystem of intelligent services.
+    </p>
+  </div>
+</section>
+
+<footer>
+  © 2026 OmniPurpose. All rights reserved.
+</footer>
+
 </body>
 </html>
