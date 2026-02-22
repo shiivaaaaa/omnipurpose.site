@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OmniPurpose Elite Calculator</title>
+<title>OmniPurpose Elite Engine</title>
 <link rel="stylesheet" href="styles.css">
 
 <script type="module">
@@ -21,9 +21,16 @@ window.location.replace("/login.html")
 </head>
 <body>
 
-<div class="calculator">
+<div class="device">
 
-<div class="top-bar">
+<div class="brand">OMNIPURPOSE ELITE</div>
+
+<div class="display-wrapper">
+<div id="modeLabel">SCIENTIFIC</div>
+<div id="display">0</div>
+</div>
+
+<div class="controls">
 <select id="modeSelect">
 <option value="scientific">Scientific</option>
 <option value="complex">Complex</option>
@@ -36,8 +43,7 @@ window.location.replace("/login.html")
 </select>
 </div>
 
-<div id="display"></div>
-<div id="modeContainer"></div>
+<div id="modeContainer" class="mode-area"></div>
 
 </div>
 
