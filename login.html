@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login — OmniPurpose</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
@@ -8,29 +11,44 @@
 <style>
 
 body {
+margin: 0;
 background: linear-gradient(135deg, #0b1220, #1f2937);
 height: 100vh;
 display: flex;
 justify-content: center;
 align-items: center;
-font-family: Arial;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
 color: white;
 }
 
 .card {
 background: #111827;
 padding: 30px;
-border-radius: 10px;
-width: 320px;
+border-radius: 12px;
+width: 340px;
 text-align: center;
+box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+border: 1px solid #1f2937;
+}
+
+h2 {
+margin-bottom: 20px;
 }
 
 input {
 width: 100%;
 padding: 12px;
 margin: 10px 0;
-border-radius: 5px;
+border-radius: 6px;
 border: none;
+outline: none;
+background: #0b1220;
+color: white;
+border: 1px solid #1f2937;
+}
+
+input:focus {
+border: 1px solid #38bdf8;
 }
 
 button {
@@ -38,9 +56,10 @@ width: 100%;
 padding: 12px;
 background: #38bdf8;
 border: none;
-border-radius: 5px;
+border-radius: 6px;
 cursor: pointer;
 font-weight: bold;
+margin-top: 5px;
 }
 
 button:hover {
@@ -48,8 +67,17 @@ background: #0ea5e9;
 }
 
 #msg {
-margin-top: 10px;
+margin-top: 15px;
 color: #9ca3af;
+font-size: 14px;
+min-height: 18px;
+}
+
+.logo {
+font-size: 20px;
+margin-bottom: 15px;
+font-weight: bold;
+color: #38bdf8;
 }
 
 </style>
@@ -60,11 +88,17 @@ color: #9ca3af;
 
 <div class="card">
 
-<h2>Login</h2>
+<div class="logo">OmniPurpose</div>
+
+<h2>Secure Login</h2>
 
 <input type="email" id="email" placeholder="Enter your email">
 
 <button onclick="sendOTP()">Send OTP</button>
+
+<input type="text" id="otp" placeholder="Enter OTP">
+
+<button onclick="verifyOTP()">Verify OTP</button>
 
 <div id="msg"></div>
 
@@ -77,19 +111,54 @@ const supabase = window.supabase.createClient(
 "sb_publishable_yhjFWE2LvzK3n4omhwzFuA_N2blhp38"
 );
 
-async function sendOTP() {
+async function sendOTP(){
 
 const email = document.getElementById("email").value;
+
+if(!email){
+document.getElementById("msg").innerText="Enter email first";
+return;
+}
 
 const { error } = await supabase.auth.signInWithOtp({
 email: email
 });
 
-if(error)
+if(error){
 document.getElementById("msg").innerText = error.message;
-else
-document.getElementById("msg").innerText =
-"OTP sent. Check your email.";
+}else{
+document.getElementById("msg").innerText = "OTP sent. Check your email.";
+}
+
+}
+
+async function verifyOTP(){
+
+const email = document.getElementById("email").value;
+const otp = document.getElementById("otp").value;
+
+if(!otp){
+document.getElementById("msg").innerText="Enter OTP first";
+return;
+}
+
+const { error } = await supabase.auth.verifyOtp({
+email: email,
+token: otp,
+type: "email"
+});
+
+if(error){
+
+document.getElementById("msg").innerText="Invalid OTP";
+
+}else{
+
+document.getElementById("msg").innerText="Login successful";
+
+window.location.href="/tools/index.html";
+
+}
 
 }
 
