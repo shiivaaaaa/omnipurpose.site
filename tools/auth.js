@@ -5,7 +5,8 @@ const supabaseClient = supabase.createClient(
 
 async function protect(){
 
-const { data:{ session } } = await supabaseClient.auth.getSession();
+const { data:{ session } } =
+await supabaseClient.auth.getSession();
 
 if(!session){
 window.location.href="/login.html";
