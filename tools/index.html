@@ -1,19 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Tools — OmniPurpose</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools — OmniPurpose</title>
+
+<style>
+body {
+  margin: 0;
+  background: #0b1220;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+  color: #e5e7eb;
+}
+
+header {
+  padding: 40px;
+  text-align: center;
+  background: #111827;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+header p {
+  color: #9ca3af;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.tool {
+  background: #111827;
+  padding: 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #e5e7eb;
+  transition: 0.2s;
+  border: 1px solid #1f2937;
+}
+
+.tool:hover {
+  background: #1f2937;
+  transform: translateY(-3px);
+}
+
+.tool h3 {
+  margin: 0 0 10px 0;
+}
+
+.tool p {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 30px;
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #6b7280;
+  border-top: 1px solid #1f2937;
+  margin-top: 40px;
+}
+</style>
+
 </head>
 <body>
 
+<header>
 <h1>OmniPurpose Tools</h1>
+<p>Powerful utilities and tools in one place</p>
+</header>
 
-<p>Select a tool:</p>
+<div class="container">
 
-<ul>
-  <li><a href="calculator.html">Calculator</a></li>
-</ul>
+<div class="tools-grid">
 
-<a href="/">← Back to Home</a>
+<a class="tool" href="calculator.html">
+<h3>Calculator</h3>
+<p>Perform basic arithmetic calculations instantly.</p>
+</a>
+
+<a class="tool" href="converter.html">
+<h3>Unit Converter</h3>
+<p>Convert units like length, weight, and more.</p>
+</a>
+
+<a class="tool" href="password.html">
+<h3>Password Generator</h3>
+<p>Generate secure random passwords.</p>
+</a>
+
+<a class="tool" href="text.html">
+<h3>Text Tools</h3>
+<p>Uppercase, lowercase, and manipulate text.</p>
+</a>
+
+<a class="tool" href="color.html">
+<h3>Color Generator</h3>
+<p>Generate random colors and hex codes.</p>
+</a>
+
+<a class="tool" href="timer.html">
+<h3>Timer</h3>
+<p>Simple countdown timer tool.</p>
+</a>
+
+</div>
+
+<a class="back" href="/">← Back to Home</a>
+
+</div>
+
+<footer>
+© 2026 OmniPurpose Tools
+</footer>
 
 </body>
 </html>
