@@ -1,8 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<title>Converter — OmniPurpose</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="/tools/auth.js"></script>
-<meta http-equiv="refresh" content="0; url=coming-soon.html">
+<script src="auth.js"></script>
+
+<style>
+
+body{
+background:#0b1220;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:Arial;
+}
+
+.card{
+background:#111827;
+padding:30px;
+border-radius:10px;
+}
+
+input{
+padding:10px;
+width:100%;
+}
+
+</style>
+
 </head>
+
+<body>
+
+<div class="card">
+
+<h2>Unit Converter</h2>
+
+<input id="meter" placeholder="Meters">
+
+<button onclick="convert()">Convert to CM</button>
+
+<p id="result"></p>
+
+</div>
+
+<script>
+
+function convert(){
+let m=document.getElementById("meter").value;
+document.getElementById("result").innerText=m*100+" cm";
+}
+
+</script>
+
+</body>
 </html>
