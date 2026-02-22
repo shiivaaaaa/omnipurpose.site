@@ -1,59 +1,97 @@
+*{box-sizing:border-box;}
+
 body{
 margin:0;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:#000;
-font-family:Inter,Segoe UI;
-color:white;
+background:radial-gradient(circle at center,#000,#050505 60%);
+font-family:Inter,system-ui;
 }
 
-.calculator{
-width:600px;
-background:#111827;
-padding:25px;
+.device{
+width:760px;
+background:linear-gradient(145deg,#0a0f1c,#020617);
+border-radius:30px;
+padding:40px;
+box-shadow:
+0 0 100px rgba(0,200,255,0.12),
+inset 0 0 30px rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.05);
+}
+
+.brand{
+text-align:center;
+color:#38bdf8;
+letter-spacing:4px;
+font-weight:600;
+margin-bottom:20px;
+}
+
+.display-wrapper{
+background:black;
 border-radius:20px;
-box-shadow:0 0 50px rgba(56,189,248,0.2);
+padding:25px;
+margin-bottom:25px;
+box-shadow:inset 0 0 30px rgba(0,255,255,0.2);
 }
 
-.top-bar{
-margin-bottom:15px;
-}
-
-select{
-padding:8px;
-border-radius:6px;
-background:#1f2937;
-color:white;
-border:none;
+#modeLabel{
+color:#64748b;
+font-size:12px;
+margin-bottom:8px;
+letter-spacing:2px;
 }
 
 #display{
-background:black;
-padding:15px;
-border-radius:10px;
-margin-bottom:20px;
-min-height:40px;
 color:#38bdf8;
-font-size:20px;
+font-size:36px;
+text-align:right;
+min-height:40px;
+overflow:auto;
 }
 
-input{
-padding:6px;
-margin:4px;
-background:#1f2937;
-border:none;
-color:white;
-border-radius:4px;
+.controls{
+margin-bottom:20px;
+}
+
+select{
+background:#0f172a;
+color:#38bdf8;
+border:1px solid #1e293b;
+padding:10px 14px;
+border-radius:10px;
+font-weight:500;
+}
+
+.mode-area{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+gap:14px;
 }
 
 button{
-padding:6px 10px;
-margin:4px;
+background:#1e293b;
 border:none;
-background:#0284c7;
+border-radius:14px;
+padding:14px;
 color:white;
-border-radius:6px;
+font-weight:500;
 cursor:pointer;
+transition:all 0.2s ease;
+box-shadow:
+0 5px 15px rgba(0,0,0,0.4);
+}
+
+button:hover{
+background:#38bdf8;
+color:black;
+transform:translateY(-3px);
+box-shadow:
+0 8px 30px rgba(56,189,248,0.6);
+}
+
+button:active{
+transform:translateY(1px);
 }
