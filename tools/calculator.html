@@ -6,195 +6,338 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Scientific Calculator — OmniPurpose</title>
 
+<!-- AUTH -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script src="auth.js"></script>
 
 <style>
 
-body {
-margin: 0;
-height: 100vh;
-background: linear-gradient(135deg, #0b1220, #1f2937);
-display: flex;
-align-items: center;
-justify-content: center;
-font-family: Arial;
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+radial-gradient(circle at top,#1f2937,#020617);
+font-family:Segoe UI,Arial;
+color:white;
 }
 
-.calculator {
-background: #111827;
-padding: 20px;
-border-radius: 15px;
-width: 340px;
-box-shadow: 0 0 40px rgba(0,0,0,0.6);
+/* calculator body */
+
+.calculator{
+background:#020617;
+padding:20px;
+border-radius:20px;
+box-shadow:
+0 0 40px rgba(56,189,248,0.15),
+0 0 100px rgba(0,0,0,0.9);
+width:360px;
 }
 
-.display {
-width: 100%;
-height: 70px;
-background: black;
-color: #38bdf8;
-font-size: 28px;
-text-align: right;
-padding: 15px;
-border-radius: 8px;
-margin-bottom: 15px;
-border: none;
+/* display */
+
+.display{
+background:black;
+padding:15px;
+border-radius:10px;
+margin-bottom:10px;
 }
 
-.buttons {
-display: grid;
-grid-template-columns: repeat(5, 1fr);
-gap: 8px;
+.previous{
+font-size:14px;
+color:#6b7280;
+min-height:18px;
 }
 
-button {
-height: 55px;
-font-size: 16px;
-border: none;
-border-radius: 8px;
-background: #1f2937;
-color: white;
-cursor: pointer;
+.current{
+font-size:32px;
+color:#38bdf8;
+word-wrap:break-word;
 }
 
-button:hover {
-background: #374151;
+/* buttons */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:8px;
 }
 
-.operator {
-background: #38bdf8;
-color: black;
+button{
+padding:14px;
+border:none;
+border-radius:10px;
+font-size:14px;
+cursor:pointer;
+background:#111827;
+color:white;
+transition:.2s;
 }
 
-.operator:hover {
-background: #0ea5e9;
+button:hover{
+background:#1f2937;
+transform:scale(1.05);
 }
 
-.clear {
-background: #ef4444;
+.operator{
+background:#0284c7;
 }
 
-.clear:hover {
-background: #dc2626;
+.operator:hover{
+background:#0369a1;
 }
 
-.func {
-background: #10b981;
-color: black;
+.function{
+background:#059669;
 }
 
-.func:hover {
-background: #059669;
+.function:hover{
+background:#047857;
 }
 
-.back {
-text-align: center;
-margin-top: 15px;
+.control{
+background:#dc2626;
 }
 
-.back a {
-color: #38bdf8;
-text-decoration: none;
+.control:hover{
+background:#b91c1c;
+}
+
+.mode{
+background:#7c3aed;
+}
+
+.mode:hover{
+background:#6d28d9;
+}
+
+.memory{
+background:#ea580c;
+}
+
+.memory:hover{
+background:#c2410c;
+}
+
+footer{
+text-align:center;
+margin-top:10px;
+font-size:12px;
+color:#6b7280;
 }
 
 </style>
 
 </head>
-
 <body>
 
 <div class="calculator">
 
-<input class="display" id="display" readonly>
+<div class="display">
 
-<div class="buttons">
+<div class="previous" id="previous"></div>
 
-<button onclick="clearDisplay()" class="clear">C</button>
+<div class="current" id="current">0</div>
+
+</div>
+
+<div class="grid">
+
+<button class="control" onclick="clearAll()">AC</button>
+<button class="control" onclick="back()">⌫</button>
+<button class="mode" onclick="toggleMode()">DEG</button>
+<button class="memory" onclick="memoryAdd()">M+</button>
+<button class="memory" onclick="memoryRecall()">MR</button>
+
+<button class="function" onclick="func('sin')">sin</button>
+<button class="function" onclick="func('cos')">cos</button>
+<button class="function" onclick="func('tan')">tan</button>
+<button class="function" onclick="func('sqrt')">√</button>
 <button onclick="append('(')">(</button>
+
+<button class="function" onclick="func('log')">log</button>
+<button class="function" onclick="func('ln')">ln</button>
+<button class="function" onclick="append(Math.PI)">π</button>
+<button class="function" onclick="append(Math.E)">e</button>
 <button onclick="append(')')">)</button>
-<button onclick="append('/')">÷</button>
-<button onclick="append('*')">×</button>
-
-<button onclick="sin()" class="func">sin</button>
-<button onclick="cos()" class="func">cos</button>
-<button onclick="tan()" class="func">tan</button>
-<button onclick="sqrt()" class="func">√</button>
-<button onclick="power()" class="func">x²</button>
-
-<button onclick="log()" class="func">log</button>
-<button onclick="ln()" class="func">ln</button>
-<button onclick="append(Math.PI)">π</button>
-<button onclick="append(Math.E)">e</button>
-<button onclick="append('-')">−</button>
 
 <button onclick="append('7')">7</button>
 <button onclick="append('8')">8</button>
 <button onclick="append('9')">9</button>
-<button onclick="append('+')" class="operator">+</button>
-<button onclick="calculate()" class="operator">=</button>
+<button class="operator" onclick="append('/')">÷</button>
+<button class="function" onclick="power()">x²</button>
 
 <button onclick="append('4')">4</button>
 <button onclick="append('5')">5</button>
 <button onclick="append('6')">6</button>
+<button class="operator" onclick="append('*')">×</button>
+<button class="function" onclick="factorial()">n!</button>
+
+<button onclick="append('1')">1</button>
+<button onclick="append('2')">2</button>
+<button onclick="append('3')">3</button>
+<button class="operator" onclick="append('-')">−</button>
+<button class="function" onclick="inverse()">1/x</button>
+
+<button onclick="append('0')">0</button>
 <button onclick="append('.')">.</button>
-<button onclick="append('0')" style="grid-column: span 2;">0</button>
+<button class="operator" onclick="append('+')">+</button>
+<button class="operator" onclick="calculate()">=</button>
+<button class="function" onclick="percent()">%</button>
 
 </div>
 
-<div class="back">
-<a href="/tools/">Back to Tools</a>
-</div>
+<footer>
+OmniPurpose Scientific Calculator
+</footer>
 
 </div>
 
 <script>
 
-let display = document.getElementById("display");
+let current="0";
+let previous="";
+let degree=true;
+let memory=0;
 
-function append(value){
-display.value += value;
+const currentEl=document.getElementById("current");
+const previousEl=document.getElementById("previous");
+
+function update(){
+currentEl.innerText=current;
+previousEl.innerText=previous;
 }
 
-function clearDisplay(){
-display.value = "";
+function append(val){
+
+if(current==="0") current="";
+
+current+=val;
+
+update();
+}
+
+function clearAll(){
+
+current="0";
+previous="";
+update();
+}
+
+function back(){
+
+current=current.slice(0,-1);
+if(current==="") current="0";
+update();
 }
 
 function calculate(){
+
 try{
-display.value = eval(display.value);
+
+previous=current;
+
+current=String(eval(current));
+
+update();
+
 }catch{
-display.value = "Error";
+
+current="Error";
+update();
 }
 }
 
-function sin(){
-display.value = Math.sin(eval(display.value));
+function func(type){
+
+let num=parseFloat(current);
+
+if(degree)
+num=num*Math.PI/180;
+
+switch(type){
+
+case "sin":
+current=String(Math.sin(num));
+break;
+
+case "cos":
+current=String(Math.cos(num));
+break;
+
+case "tan":
+current=String(Math.tan(num));
+break;
+
+case "sqrt":
+current=String(Math.sqrt(parseFloat(current)));
+break;
+
+case "log":
+current=String(Math.log10(parseFloat(current)));
+break;
+
+case "ln":
+current=String(Math.log(parseFloat(current)));
+break;
+
 }
 
-function cos(){
-display.value = Math.cos(eval(display.value));
-}
-
-function tan(){
-display.value = Math.tan(eval(display.value));
-}
-
-function sqrt(){
-display.value = Math.sqrt(eval(display.value));
+update();
 }
 
 function power(){
-display.value = Math.pow(eval(display.value),2);
+
+current=String(Math.pow(parseFloat(current),2));
+update();
 }
 
-function log(){
-display.value = Math.log10(eval(display.value));
+function factorial(){
+
+let n=parseInt(current);
+let f=1;
+
+for(let i=1;i<=n;i++) f*=i;
+
+current=String(f);
+
+update();
 }
 
-function ln(){
-display.value = Math.log(eval(display.value));
+function inverse(){
+
+current=String(1/parseFloat(current));
+update();
 }
+
+function percent(){
+
+current=String(parseFloat(current)/100);
+update();
+}
+
+function toggleMode(){
+
+degree=!degree;
+
+document.querySelector(".mode").innerText=
+degree?"DEG":"RAD";
+}
+
+function memoryAdd(){
+
+memory+=parseFloat(current);
+}
+
+function memoryRecall(){
+
+current=String(memory);
+update();
+}
+
+update();
 
 </script>
 
