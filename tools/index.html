@@ -1,9 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tools — OmniPurpose</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
+
+const supabase = window.supabase.createClient(
+"https://bhbdkarfpmvdbtdbsvmv.supabase.co",
+"sb_publishable_yhjFWE2LvzK3n4omhwzFuA_N2blhp38"
+);
+
+async function checkAuth() {
+
+const { data } = await supabase.auth.getUser();
+
+if (!data.user) {
+window.location = "/login.html";
+}
+
+}
+
+checkAuth();
+
+</script>
 
 <style>
 body {
@@ -82,6 +106,7 @@ footer {
 </style>
 
 </head>
+
 <body>
 
 <header>
