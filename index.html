@@ -3,275 +3,190 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OmniPurpose — Universal Digital Platform</title>
+<title>OmniPurpose</title>
 
 <style>
 
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,Segoe UI,Arial;
 }
 
-body {
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
-background: #0b1220;
-color: #e5e7eb;
-line-height: 1.6;
+body{
+background:#000;
+color:white;
+overflow-x:hidden;
 }
 
-/* NAVBAR */
-
-nav {
-position: fixed;
-top: 0;
-width: 100%;
-background: rgba(11,18,32,0.8);
-backdrop-filter: blur(10px);
-padding: 15px 40px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-border-bottom: 1px solid #1f2937;
-z-index: 1000;
+/* PARTICLE CANVAS */
+#particles{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-2;
 }
 
-nav h1 {
-font-size: 20px;
-}
-
-nav a {
-color: #e5e7eb;
-text-decoration: none;
-margin-left: 20px;
-}
-
-nav a:hover {
-color: #38bdf8;
+/* CURSOR GLOW */
+.cursor-glow{
+position:fixed;
+width:300px;
+height:300px;
+border-radius:50%;
+pointer-events:none;
+background:radial-gradient(circle,rgba(56,189,248,0.25) 0%,transparent 70%);
+transform:translate(-50%,-50%);
+z-index:-1;
+transition:transform 0.05s linear;
 }
 
 /* HERO */
-
-.hero {
-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-background: linear-gradient(135deg, #0b1220, #1f2937);
-padding: 20px;
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:0 10%;
+position:relative;
 }
 
-.hero h2 {
-font-size: 56px;
-margin-bottom: 20px;
+.hero h1{
+font-size:72px;
+letter-spacing:-2px;
+margin-bottom:20px;
 }
 
-.hero p {
-font-size: 20px;
-color: #9ca3af;
-max-width: 600px;
+.hero span{
+background:linear-gradient(90deg,#38bdf8,#7c3aed);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-.hero button {
-margin-top: 30px;
-padding: 14px 30px;
-background: #38bdf8;
-border: none;
-border-radius: 8px;
-font-size: 16px;
-font-weight: bold;
-cursor: pointer;
+.hero p{
+max-width:600px;
+color:#aaa;
+font-size:18px;
+margin-bottom:40px;
 }
 
-.hero button:hover {
-background: #0ea5e9;
+/* BUTTONS */
+.btn{
+padding:14px 30px;
+border-radius:8px;
+border:1px solid #38bdf8;
+background:transparent;
+color:white;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+background:#38bdf8;
+color:black;
+box-shadow:0 0 20px #38bdf8;
 }
 
 /* SECTION */
-
-section {
-padding: 80px 20px;
-max-width: 1100px;
-margin: auto;
+.section{
+padding:120px 8%;
+text-align:center;
 }
 
-section h3 {
-font-size: 36px;
-margin-bottom: 20px;
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:40px;
+margin-top:60px;
 }
 
-/* TOOLS GRID */
-
-.grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-gap: 20px;
-margin-top: 30px;
+.card{
+background:rgba(255,255,255,0.05);
+padding:40px;
+border-radius:16px;
+position:relative;
+overflow:hidden;
+transition:.4s;
+opacity:0;
+transform:translateY(60px);
 }
 
-.card {
-background: #111827;
-padding: 20px;
-border-radius: 10px;
-border: 1px solid #1f2937;
+/* NEON BORDER */
+.card::before{
+content:"";
+position:absolute;
+top:-2px;
+left:-2px;
+right:-2px;
+bottom:-2px;
+background:linear-gradient(45deg,#38bdf8,#7c3aed,#38bdf8);
+z-index:-1;
+filter:blur(20px);
+opacity:0;
+transition:.4s;
 }
 
-.card:hover {
-background: #1f2937;
+.card:hover::before{
+opacity:1;
 }
 
-.card a {
-color: #38bdf8;
-text-decoration: none;
+.card:hover{
+transform:translateY(-10px) scale(1.03);
 }
 
-/* CEO */
-
-.ceo {
-display: flex;
-gap: 20px;
-align-items: center;
-background: #111827;
-padding: 30px;
-border-radius: 10px;
-margin-top: 20px;
+/* FADE IN */
+.show{
+opacity:1;
+transform:translateY(0);
+transition:1s ease;
 }
 
-.ceo img {
-width: 100px;
-height: 100px;
-border-radius: 50%;
-}
-
-/* FOOTER */
-
-footer {
-text-align: center;
-padding: 40px;
-color: #6b7280;
-border-top: 1px solid #1f2937;
-margin-top: 40px;
+footer{
+text-align:center;
+padding:40px;
+color:#555;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<nav>
+<canvas id="particles"></canvas>
+<div class="cursor-glow" id="glow"></div>
 
-<h1>OmniPurpose</h1>
+<section class="hero" id="hero">
 
-<div>
+<h1>All Tools.<br><span>One Platform.</span></h1>
+<p>High-performance digital utilities engineered with precision and security.</p>
 
-<a href="#about">About</a>
-<a href="#tools">Tools</a>
-<a href="#ceo">CEO</a>
-
-</div>
-
-</nav>
-
-<div class="hero">
-
-<h2>OmniPurpose</h2>
-
-<p>
-A universal platform designed to host powerful tools,
-applications, and digital infrastructure in one place.
-</p>
-
-<button onclick="location.href='/tools/'">
-Explore Tools
-</button>
-
-</div>
-
-<section id="about">
-
-<h3>About the Platform</h3>
-
-<p>
-
-OmniPurpose is a next-generation digital platform built to provide
-a unified environment for tools, utilities, and scalable web applications.
-The goal is to create a centralized ecosystem capable of hosting diverse
-services ranging from productivity tools to advanced intelligent systems.
-
-</p>
+<button class="btn" onclick="location.href='/tools/'">Explore Tools</button>
 
 </section>
 
-<section id="tools">
+<section class="section">
 
-<h3>Available Tools</h3>
+<h2>Core Utilities</h2>
 
 <div class="grid">
 
 <div class="card">
-<h4>Calculator</h4>
-<p>Perform fast and accurate calculations.</p>
-<a href="/tools/calculator.html">Open Tool</a>
+<h3>Scientific Calculator</h3>
+<p>Real-time advanced computation engine.</p>
 </div>
 
 <div class="card">
-<h4>Converter</h4>
-<p>Convert between multiple unit types.</p>
-<a href="/tools/converter.html">Open Tool</a>
+<h3>Conversion Engine</h3>
+<p>Fast and reliable unit transformation system.</p>
 </div>
 
 <div class="card">
-<h4>Password Generator</h4>
-<p>Generate secure passwords instantly.</p>
-<a href="/tools/password.html">Open Tool</a>
-</div>
-
-<div class="card">
-<h4>Text Tools</h4>
-<p>Manipulate and transform text.</p>
-<a href="/tools/text.html">Open Tool</a>
-</div>
-
-<div class="card">
-<h4>Timer</h4>
-<p>Countdown timer and time utilities.</p>
-<a href="/tools/timer.html">Open Tool</a>
-</div>
-
-<div class="card">
-<h4>Color Generator</h4>
-<p>Create and explore colors.</p>
-<a href="/tools/color.html">Open Tool</a>
-</div>
-
-</div>
-
-</section>
-
-<section id="ceo">
-
-<h3>Founder & CEO</h3>
-
-<div class="ceo">
-
-<div>
-
-<h4>Shiva Singh</h4>
-
-<p>
-
-Shiva Singh is the founder and CEO of OmniPurpose.
-He established this platform to build a scalable digital ecosystem capable
-of hosting multiple applications, tools, and intelligent systems under one unified domain.
-
-His vision is to transform OmniPurpose into a full-scale universal platform
-for digital utilities and services.
-
-</p>
-
+<h3>Secure Tools</h3>
+<p>Security-first digital utilities platform.</p>
 </div>
 
 </div>
@@ -279,11 +194,78 @@ for digital utilities and services.
 </section>
 
 <footer>
-
-© 2026 OmniPurpose  
-Universal Digital Platform  
-
+© 2026 OmniPurpose
 </footer>
+
+<script>
+
+/* PARTICLE SYSTEM */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+dx:(Math.random()-0.5)*0.5,
+dy:(Math.random()-0.5)*0.5
+});
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach(p=>{
+p.x+=p.dx;
+p.y+=p.dy;
+
+if(p.x<0||p.x>canvas.width)p.dx*=-1;
+if(p.y<0||p.y>canvas.height)p.dy*=-1;
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle="rgba(56,189,248,0.6)";
+ctx.fill();
+});
+
+requestAnimationFrame(animate);
+}
+
+animate();
+
+/* CURSOR GLOW */
+const glow=document.getElementById("glow");
+document.addEventListener("mousemove",e=>{
+glow.style.left=e.clientX+"px";
+glow.style.top=e.clientY+"px";
+});
+
+/* SCROLL FADE */
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+},{threshold:0.2});
+
+document.querySelectorAll(".card").forEach(el=>{
+observer.observe(el);
+});
+
+/* PARALLAX */
+window.addEventListener("scroll",()=>{
+const hero=document.getElementById("hero");
+hero.style.transform=`translateY(${window.scrollY*0.2}px)`;
+});
+
+</script>
 
 </body>
 </html>
