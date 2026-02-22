@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login — OmniPurpose</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<style>
+
+body {
+background: linear-gradient(135deg, #0b1220, #1f2937);
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: Arial;
+color: white;
+}
+
+.card {
+background: #111827;
+padding: 30px;
+border-radius: 10px;
+width: 320px;
+text-align: center;
+}
+
+input {
+width: 100%;
+padding: 12px;
+margin: 10px 0;
+border-radius: 5px;
+border: none;
+}
+
+button {
+width: 100%;
+padding: 12px;
+background: #38bdf8;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-weight: bold;
+}
+
+button:hover {
+background: #0ea5e9;
+}
+
+#msg {
+margin-top: 10px;
+color: #9ca3af;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Login</h2>
+
+<input type="email" id="email" placeholder="Enter your email">
+
+<button onclick="sendOTP()">Send OTP</button>
+
+<div id="msg"></div>
+
+</div>
+
+<script>
+
+const supabase = window.supabase.createClient(
+"https://bhbdkarfpmvdbtdbsvmv.supabase.co",
+"sb_publishable_yhjFWE2LvzK3n4omhwzFuA_N2blhp38"
+);
+
+async function sendOTP() {
+
+const email = document.getElementById("email").value;
+
+const { error } = await supabase.auth.signInWithOtp({
+email: email
+});
+
+if(error)
+document.getElementById("msg").innerText = error.message;
+else
+document.getElementById("msg").innerText =
+"OTP sent. Check your email.";
+
+}
+
+</script>
+
+</body>
+</html>
