@@ -6,9 +6,20 @@
 <meta http-equiv="Expires" content="0" />
 <title>Color Tool</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="auth.js"></script>
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
 
+const supabaseClient = createClient(
+"https://bhbdkarfpmvdbtdbsvmv.supabase.co",
+"sb_publishable_yhjFWE2LvzK3n4omhwzFuA_N2blhp38"
+)
+
+const { data } = await supabaseClient.auth.getSession()
+
+if(!data.session){
+window.location.replace("/login.html")
+}
+</script>
 </head>
 
 <body style="background:#0b1220;color:white;text-align:center;margin-top:100px;">
