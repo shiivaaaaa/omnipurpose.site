@@ -1,3 +1,4 @@
+console.log("AUTH FILE LOADED");
 const supabaseClient = supabase.createClient(
 "https://bhbdkarfpmvdbtdbsvmv.supabase.co",
 "sb_publishable_yhjFWE2LvzK3n4omhwzFuA_N2blhp38"
