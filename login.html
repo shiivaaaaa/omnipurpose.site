@@ -6,7 +6,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login — OmniPurpose</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+
+const supabase = window.supabase.createClient(
+"https://bhbdkarfpmvdbtdbsvmv.supabase.co",
+"sb_publishable_yhjFWE2LvzK3n4omhwzFuA_N2blhp38"
+);
+
+// check if user already logged in
+checkSession();
+
+async function checkSession() {
+
+const { data } = await supabase.auth.getSession();
+
+if(data.session){
+window.location.href = "/";
+}
+
+}
+
+// send OTP
+async function sendOTP(){
+
+const email = document.getElementById("email").value;
+
+const { error } = await supabase.auth.signInWithOtp({
+email: email,
+options: {
+emailRedirectTo: "https://omnipurpose.site"
+}
+});
+
+if(error)
+document.getElementById("msg").innerText = error.message;
+else
+document.getElementById("msg").innerText = "Check your email for login link.";
+
+}
+
+</script>
 
 <style>
 
