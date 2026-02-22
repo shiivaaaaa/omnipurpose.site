@@ -4,13 +4,11 @@ const supabase = window.supabase.createClient(
 );
 
 async function checkAuth() {
-
   const { data, error } = await supabase.auth.getUser();
 
   if (!data.user) {
     window.location.href = "/login.html";
   }
-
 }
 
 checkAuth();
