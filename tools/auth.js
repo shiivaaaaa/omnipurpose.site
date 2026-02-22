@@ -9,9 +9,15 @@ const { data:{ session } } =
 await supabaseClient.auth.getSession();
 
 if(!session){
-window.location.href="/login.html";
+window.location.replace("/login.html");
 }
 
 }
 
+/* Run immediately */
 protect();
+
+/* Run again if user navigates back */
+window.addEventListener("pageshow", function(){
+protect();
+});
