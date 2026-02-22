@@ -10,9 +10,8 @@ import { loadTable } from "./modes/table.js";
 const container = document.getElementById("modeContainer");
 const modeSelect = document.getElementById("modeSelect");
 
-function loadMode(mode) {
-container.innerHTML = "";
-
+function loadMode(mode){
+container.innerHTML="";
 switch(mode){
 case "scientific": loadScientific(container); break;
 case "complex": loadComplex(container); break;
